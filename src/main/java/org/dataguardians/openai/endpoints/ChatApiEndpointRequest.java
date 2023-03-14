@@ -10,54 +10,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a request to the OpenAI Chat API endpoint.
+ * Represents an API endpoint request for the OpenAI Chat API.
  *
- * This class provides a convenient way to build a request to the OpenAI Chat API. It includes methods to set the input
- * text, the model to use, and the parameters for the request, among others. Once the request is built, it can be sent
- * using the {@link ChatApiEndpoint#send(ChatApiEndpointRequest)} method.
- *
- * Example usage:
- *
- * <pre>{@code
- * ChatApiEndpointRequest request = new ChatApiEndpointRequest()
- *         .setModel("davinci")
- *         .setInput("Hello, world!")
- *         .addParameter("temperature", 0.5)
- *         .addParameter("max_tokens", 10);
- *
- * ChatApiEndpoint endpoint = new ChatApiEndpoint(apiKey);
- * ChatApiResponse response = endpoint.send(request);
- * }</pre>
- *
- * @see ChatApiEndpoint
- * @see ChatApiResponse
+ * This class extends the ApiEndPointRequest class and provides functionality for sending requests to the OpenAI Chat
+ * API endpoint. It includes a static API_ENDPOINT field which contains the URL of the Chat API endpoint. It also
+ * overrides the getEndpoint method of the ApiEndPointRequest class to return the API_ENDPOINT value.
  */
 @Data
 @SuperBuilder
 public class ChatApiEndpointRequest extends ApiEndPointRequest {
 
+    /**
+     * The URL of the OpenAI Chat API endpoint.
+     */
     public static final String API_ENDPOINT = "https://api.openai.com/v1/chat/completions";
 
+    /**
+     * Overrides the getEndpoint method of the ApiEndPointRequest class to return the Chat API endpoint URL.
+     *
+     * @return The URL of the OpenAI Chat API endpoint.
+     */
     @Override
     public String getEndpoint() {
         return API_ENDPOINT;
     }
 
     /**
-     * Creates a new instance of the ChatApiEndpoint with the specified API key.
+     * Creates a new instance of the ChatApiEndpointRequest with the specified API key.
      *
-     * This method is used to create a new instance of the ChatApiEndpoint with the specified API key. The API key is
-     * required to send requests to the OpenAI Chat API endpoint. If the API key is invalid or not provided, an
+     * This method is used to create a new instance of the ChatApiEndpointRequest with the specified API key. The API key
+     * is required to send requests to the OpenAI Chat API endpoint. If the API key is invalid or not provided, an
      * IllegalArgumentException will be thrown.
      *
      * Example usage:
      *
      * <pre>{@code
-     * ChatApiEndpoint endpoint = ChatApiEndpoint.create("my-api-key");
+     * ChatApiEndpointRequest endpoint = ChatApiEndpointRequest.create("my-api-key");
      * }</pre>
      *
      * @param apiKey The API key to use for requests to the OpenAI Chat API endpoint.
-     * @return A new instance of the ChatApiEndpoint.
+     * @return A new instance of the ChatApiEndpointRequest.
      * @throws IllegalArgumentException If the API key is null or empty.
      */
     @Override
